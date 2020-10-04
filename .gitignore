@@ -1,0 +1,72 @@
+# Build and Release Folders
+bin-debug/
+bin-release/
+[Oo]bj/
+[Bb]in/
+
+# Other files and folders
+# resnet20
+resnet20-cifar10/
+resnet20-cifar100/
+resnet20-cifar10-add/
+resnet20-cifar10-add-poly/
+resnet20-cifar10-add-cosine/
+resnet20-cifar10-add-cosine_v2/
+resnet20-cifar10-normaladd_se/
+resnet20-cifar10-mult/
+resnet20-cifar10-normaladd_se/
+resnet20-cifar10-shift/
+resnet20-cifar10-shift_se/
+resnet20-cifar10-shiftadd/
+resnet20-cifar10-shiftadd_newps/
+resnet20-cifar10-shiftadd_se/
+resnet20-cifar10-shiftadd-temp/
+resnet20-cifar10-shiftadd-newps/
+resnet20-cifar100-add/
+resnet20-cifar100-add-poly/
+resnet20-cifar100-add-cosine/
+resnet20-cifar100-normaladd_se/
+resnet20-cifar100-shift/
+resnet20-cifar100-shift_se/
+resnet20-cifar100-shiftadd/
+resnet20-cifar100-shiftadd_se/
+
+# resnet50
+resnet50-imagenet-add
+
+# resnet110
+resnet110-cifar10-add
+resnet110-cifar10-shiftadd_se
+
+# vgg-small
+vgg19-cifar10-add-poly/
+vgg19-cifar10-add-cosine/
+vgg19-cifar10-shiftadd/
+vgg19-cifar10-shiftadd_se/
+vgg19-cifar100-add-cosine/
+vgg19-cifar100-shiftadd/
+vgg19-cifar100-shiftadd_se/
+vgg19_small-cifar10-shiftadd_se/
+vgg19_small-cifar100-shiftadd_se/
+
+# resnet34
+resnet34-imagenet-add/
+
+# rebuttal
+rebuttal/
+
+# others
+data.cifar10/
+data.cifar100/
+visualization/
+adder/adder.egg-info/
+adder/build/
+adder/dist/
+ckpt/
+temp/
+
+# Executables
+*.swf
+*.air
+*.ipa
+*.apk

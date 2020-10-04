@@ -1,0 +1,12 @@
+python train.py \
+--dataset cifar100 \
+--arch resnet20_shift \
+--save ./temp \
+--shift_depth 100 \
+--shift_type PS \
+--rounding deterministic \
+--weight_bits 3 \
+--optimizer sgd \
+--lr 0.1 \
+--eval_only \
+--resume ./ShiftAddNet_ckpt/deepshift/resnet20-cifar100.pth.tar
