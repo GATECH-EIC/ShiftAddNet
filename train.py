@@ -12,7 +12,6 @@ from torch.autograd import Variable
 import models
 import optim
 import torch.backends.cudnn as cudnn
-from torch_poly_lr_decay import PolynomialLRDecay
 from cyclicLR import CyclicCosAnnealingLR
 
 from deepshift.convert import convert_to_shift, round_shift_weights, count_layer_type
@@ -37,7 +36,7 @@ parser.add_argument('--start_epoch', type=int, default=0, metavar='N', help='res
 parser.add_argument('--schedule', type=int, nargs='+', default=[80, 120], help='learning rate schedule')
 parser.add_argument('--lr', type=float, default=0.1, metavar='LR', help='learning rate')
 parser.add_argument('--lr-sign', default=None, type=float, help='separate initial learning rate for sign params')
-parser.add_argument('--lr_decay', default='stepwise', type=str, choices=['stepwise', 'poly', 'cosine', 'cyclic_cosine'])
+parser.add_argument('--lr_decay', default='stepwise', type=str, choices=['stepwise', 'cosine', 'cyclic_cosine'])
 parser.add_argument('--optimizer', type=str, default='sgd', help='used optimizer')
 parser.add_argument('--momentum', type=float, default=0.9, metavar='M', help='SGD momentum')
 parser.add_argument('--weight-decay', '--wd', default=1e-4, type=float, metavar='W', help='weight decay')
@@ -271,7 +270,6 @@ elif (args.optimizer.lower() == "ranger"):
 else:
     raise ValueError("Optimizer type: ", args.optimizer, " is not supported or known")
 
-scheduler_poly_lr_decay = PolynomialLRDecay(optimizer, max_decay_steps=args.epochs, end_learning_rate=0.0001, power=0.9)
 schedule_cosine_lr_decay = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, args.epochs, eta_min=0, last_epoch=-1)
 scheduler_cyclic_cosine_lr_decay = CyclicCosAnnealingLR(optimizer, milestones=[40,60,80,100,140,180,200,240,280,300,340,400], decay_milestones=[100, 200, 300, 400], eta_min=0)
 
@@ -589,9 +587,6 @@ for epoch in range(args.start_epoch, args.epochs):
         if epoch in args.schedule:
             for param_group in optimizer.param_groups:
                 param_group['lr'] *= 0.1
-    elif args.lr_decay == 'poly':
-        # Poly LR schedule
-        scheduler_poly_lr_decay.step(epoch)
     elif args.lr_decay == 'cosine':
         schedule_cosine_lr_decay.step(epoch)
     elif args.lr_decay == 'cyclic_cosine':

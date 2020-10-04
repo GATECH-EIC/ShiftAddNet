@@ -11,7 +11,6 @@ This is PyTorch implementation of ***ShiftAddNet: A Hardware-Inspired Deep Netwo
 
 * GCC >= 5.4.0
 * PyTorch == 1.4
-* pip install git+https://github.com/cmpark0126/pytorch-polynomial-lr-decay.git
 * other common library are included in requirements.txt
 
 
