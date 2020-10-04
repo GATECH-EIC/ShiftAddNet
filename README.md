@@ -120,10 +120,10 @@ Reproduce the T-SNE visualization of the class divergences in AdderNet, and the 
 bash ./scripts/gen_feat.sh # generate the features that will be used for visualization
 
 cd tsne_vis &&
-python visual_tsne.py --save_dir resnet20_add_FP32
-python visual_tsne.py --save_dir resnet20_add_FIX8
-python visual_tsne.py --save_dir resnet20_shiftadd_FP32
-python visual_tsne.py --save_dir resnet20_shiftadd_FIX8
+python visual_tsne.py --save_dir resnet20_add_FP32 --scratch
+python visual_tsne.py --save_dir resnet20_add_FIX8 --scratch
+python visual_tsne.py --save_dir resnet20_shiftadd_FP32 --scratch
+python visual_tsne.py --save_dir resnet20_shiftadd_FIX8 --scratch
 
 python visual_tsne.py --save_dir resnet20_add_FP32 --scratch --dim_3d
 python visual_tsne.py --save_dir resnet20_add_FIX8 --scratch --dim_3d
