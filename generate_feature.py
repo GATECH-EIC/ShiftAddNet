@@ -21,7 +21,6 @@ import time
 
 from adder.adder import Adder2D
 import deepshift
-from visualize import visualizer
 os.environ['CUDA_VISIBLE_DEVICES'] = '0,1,2,3,4,5,6,7'
 
 # Training settings
@@ -59,15 +58,11 @@ parser.add_argument('--use-kernel', type=lambda x:bool(distutils.util.strtobool(
 parser.add_argument('--add_quant', type=bool, default=False, help='whether to quantize adder layer')
 parser.add_argument('--add_bits', type=int, default=8, help='number of bits to represent the adder filters')
 parser.add_argument('--quantize_v', type=str, default='sbm', help='quantize version')
-# visualization
-parser.add_argument('--visualize', action="store_true", default=False, help='if use visualization')
 # distributed parallel
 parser.add_argument("--local_rank", type=int, default=0)
 parser.add_argument("--port", type=str, default="15000")
 parser.add_argument('--distributed', action='store_true', help='whether to use distributed training')
-# tropical visualization
-parser.add_argument('--vis_tropical',default=False, type=bool, help='visualize last layer of network')
-parser.add_argument('--visualize_dir',default="", type=str, help='visualize last layer of network')
+# eval only
 parser.add_argument('--eval_only', action='store_true', help='whether only evaluation')
 
 args = parser.parse_args()
@@ -341,10 +336,7 @@ def test():
         if args.cuda:
             data, target = data.cuda(), target.cuda()
         data, target = Variable(data, volatile=True), Variable(target)
-        if args.visualize:
-            _, output = model(data)
-        else:
-            output = model(data)
+        output = model(data)
         test_loss += F.cross_entropy(output, target, size_average=False).item() # sum up batch loss
         prec1, prec5 = accuracy(output.data, target.data, topk=(1, 5))
         test_acc += prec1.item()

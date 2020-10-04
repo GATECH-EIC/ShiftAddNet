@@ -117,7 +117,7 @@ Please refer to `./IoT` directory for detailed description.
 Reproduce the T-SNE visualization of the class divergences in AdderNet, and the proposed ShiftAddNet, using ResNet-20 on CIFAR-10 as an example.
 
 ````
-python ./scripts/gen_feat.sh # generate the features that will be used for visualization
+bash ./scripts/gen_feat.sh # generate the features that will be used for visualization
 
 cd tsne_vis &&
 python visual_tsne.py --save_dir resnet20_add_FP32
