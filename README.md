@@ -129,6 +129,7 @@ python visual_tsne.py --save_dir resnet20_shiftadd_FIX8 --scratch --dim_3d
 ````
 
 The output figure should look like below:
+<br><br>
 ![](./tsne_vis/comp.png)
 
 
