@@ -109,6 +109,31 @@ We release the pretrained checkpoints in [Google Drive](https://drive.google.com
 
 ---
 
+### T-SNE Visualization
+
+Reproduce the T-SNE visualization of the class divergences in AdderNet, and the proposed ShiftAddNet, using ResNet-20 on CIFAR-10 as an example.
+
+````
+python ./scripts/gen_feat.sh # generate the features that will be used for visualization
+
+cd tsne_vis &&
+python visual_tsne.py --save_dir resnet20_add_FP32
+python visual_tsne.py --save_dir resnet20_add_FIX8
+python visual_tsne.py --save_dir resnet20_shiftadd_FP32
+python visual_tsne.py --save_dir resnet20_shiftadd_FIX8
+
+python visual_tsne.py --save_dir resnet20_add_FP32 --scratch --dim_3d
+python visual_tsne.py --save_dir resnet20_add_FIX8 --scratch --dim_3d
+python visual_tsne.py --save_dir resnet20_shiftadd_FP32 --scratch --dim_3d
+python visual_tsne.py --save_dir resnet20_shiftadd_FIX8 --scratch --dim_3d
+````
+
+The output figure should look like below:
+![](./tsne_vis/comp.png)
+
+
+---
+
 ### Citation
 
 If you find this codebase is useful for your research, please cite:
