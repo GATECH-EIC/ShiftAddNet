@@ -132,6 +132,11 @@ The output figure should look like below:
 <br><br>
 ![](./tsne_vis/comp.png)
 
+---
+
+### ShiftAddNet on IoT
+
+Please refer to `./IoT` directory for detailed description.
 
 ---
 
