@@ -95,7 +95,7 @@ We release the pretrained checkpoints in [Google Drive](https://drive.google.com
     bash ./scripts/shiftaddnet/cifar100/FIX8.sh
 ````
 
-* Examples for training of ShiftAddNet (FIX shift variant)
+* Examples for training of ShiftAddNet (Fixed shift variant)
 
 ````
 # CIFAR-10
