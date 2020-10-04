@@ -11,16 +11,16 @@ This is a PyTorch implementation of ***ShiftAddNet: A Hardware-Inspired Deep Net
 
 * GCC >= 5.4.0
 * PyTorch == 1.4
-* other common library are included in requirements.txt
+* Other common library are included in `requirements.txt`
 
 
 ### Compile Adder Cuda Kernal
 
 The original [AdderNet Repo](https://github.com/huawei-noah/AdderNet) considers using PyTorch for implementing add absed convolution, however it remains slow and requires much more runtime memory costs as compared to the variant with CUDA acceleration.
 
-We here provide one kind of CUDA implementation, please follow the intruction below to compile and check that the `forwad/backward` results are consistent with original version.
+We here provide one kind of CUDA implementation, please follow the intruction below to compile and check that the `forwad/backward` results are consistent with the original version.
 
-#### Step 1: modify pytorch before launch (for compiling issue)
+#### Step 1: modify PyTorch before launch (for solving compiling issue)
 
 Change lines:57-64 in `anaconda3/lib/python3.7/site-packages/torch/include/THC/THCTensor.hpp`
 from:
@@ -52,6 +52,8 @@ to:
 ````
 python check.py
 ````
+
+You should be able to successfully compile and see the runtime speed comparisons in the toy cases.
 
 ---
 
