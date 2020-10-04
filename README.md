@@ -57,7 +57,7 @@ You should be able to successfully compile and see the runtime speed comparisons
 
 
 
-## Reproduce Resutlts in Paper
+## Reproduce Results in Paper
 
 We release the pretrained checkpoints in [Google Drive](https://drive.google.com/drive/folders/1nON7w5-y40PPGT1NCh_n_h3RLFwP8DO6?usp=sharing). To evaluate the inference accuracy of test set, we provide evaluation scripts shown below for your convenience. If you want to train your own model, the only change should be removing `--eval_only` option in the commands.
 
