@@ -1,6 +1,11 @@
 # ShiftAddNet
-[NeurIPS 2020] ShiftAddNet: A Hardware-Inspired Deep Network
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-success.svg)](https://opensource.org/licenses/MIT)
+
+This is PyTorch implementation of ***ShiftAddNet: A Hardware-Inspired Deep Network*** published on the NeurIPS 2020
+
+
+---
 
 ### Prerequisite
 
@@ -9,7 +14,6 @@
 * pip install git+https://github.com/cmpark0126/pytorch-polynomial-lr-decay.git
 * other common library are included in requirements.txt
 
----
 
 ### Compile Adder Cuda Kernal
 
@@ -43,7 +47,7 @@ to:
 
 
 ````
-
+python adder/check.py
 ````
 
 ---
