@@ -2,12 +2,16 @@
 [NeurIPS 2020] ShiftAddNet: A Hardware-Inspired Deep Network
 
 
-### prerequisite
+### Prerequisite
 
 * GCC >= 5.4.0
 * PyTorch == 1.4
 * pip install git+https://github.com/cmpark0126/pytorch-polynomial-lr-decay.git
 * other common library are included in requirements.txt
+
+---
+
+### Compile Adder Cuda Kernal
 
 #### Step 1: modify pytorch before launch (for compiling issue)
 
@@ -35,4 +39,11 @@ to:
 #include <THC/THCGenerateBFloat16Type.h>
 ````
 
-# Step 2: launch command to make sure you can successfully compile
+#### Step 2: launch command to make sure you can successfully compile
+
+
+````
+
+````
+
+---
