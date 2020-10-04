@@ -21,7 +21,6 @@ import time
 
 from adder.adder import Adder2D
 import deepshift
-from visualize import visualizer
 os.environ['CUDA_VISIBLE_DEVICES'] = '0,1,2,3,4,5,6,7'
 
 # Training settings
@@ -61,15 +60,11 @@ parser.add_argument('--add_bits', type=int, default=8, help='number of bits to r
 parser.add_argument('--quantize_v', type=str, default='sbm', help='quantize version')
 # shift hyper-parameters
 parser.add_argument('--shift_quant_bits', type=int, default=16, help='quantization training for shift layer')
-# visualization
-parser.add_argument('--visualize', action="store_true", default=False, help='if use visualization')
 # distributed parallel
 parser.add_argument("--local_rank", type=int, default=0)
 parser.add_argument("--port", type=str, default="15000")
 parser.add_argument('--distributed', action='store_true', help='whether to use distributed training')
-# tropical visualization
-parser.add_argument('--vis_tropical',default=False, type=bool, help='visualize last layer of network')
-parser.add_argument('--visualize_dir',default="", type=str, help='visualize last layer of network')
+# eval only
 parser.add_argument('--eval_only', action='store_true', help='whether only evaluation')
 
 args = parser.parse_args()
@@ -373,8 +368,6 @@ if args.sign_threshold_ps:
     shift_label += '_ps_thre-{}'.format(args.sign_threshold_ps)
 
 args.save = os.path.join(args.save, shift_label)
-if args.visualize:
-    args.save = os.path.join('./visualization', args.save[2:])
 if not os.path.exists(args.save):
     os.makedirs(args.save)
 
@@ -498,14 +491,7 @@ def train(epoch):
             data, target = data.cuda(), target.cuda()
         data, target = Variable(data), Variable(target)
         optimizer.zero_grad()
-        if args.visualize:
-            ### store for visualization ###
-            feat, output = model(data)
-            feat_loader.append(feat)
-            idx_loader.append(target)
-            ###############################
-        else:
-            output = model(data)
+        output = model(data)
         loss = F.cross_entropy(output, target)
         avg_loss += loss.item()
         prec1, prec5 = accuracy(output.data, target.data, topk=(1, 5))
@@ -541,11 +527,6 @@ def train(epoch):
 
     print('total time for one epoch: {}'.format(time.time()-start_time))
 
-    if args.visualize:
-        feat = torch.cat(feat_loader, 0)
-        labels = torch.cat(idx_loader, 0)
-        visualize(feat.data.cpu().numpy(), labels.data.cpu().numpy(), epoch)
-
 def test():
     model.eval()
     test_loss = 0
@@ -555,10 +536,7 @@ def test():
         if args.cuda:
             data, target = data.cuda(), target.cuda()
         data, target = Variable(data, volatile=True), Variable(target)
-        if args.visualize:
-            _, output = model(data)
-        else:
-            output = model(data)
+        output = model(data)
         test_loss += F.cross_entropy(output, target, size_average=False).item() # sum up batch loss
         prec1, prec5 = accuracy(output.data, target.data, topk=(1, 5))
         test_acc += prec1.item()
@@ -572,7 +550,6 @@ def test():
 
 best_prec1 = 0.
 best_prec5 = 0.
-vis = visualizer(args.epochs, num_classes)
 for epoch in range(args.start_epoch, args.epochs):
 
     if args.eval_only:
@@ -595,8 +572,6 @@ for epoch in range(args.start_epoch, args.epochs):
         raise NotImplementedError
 
     train(epoch)
-    if args.vis_tropical:
-        vis.visualize(list(model.children())[-1].weight.data.cpu(), epoch, dir=args.visualize_dir)
     with torch.no_grad():
         prec1, prec5 = test()
     history_score[epoch][2] = prec1

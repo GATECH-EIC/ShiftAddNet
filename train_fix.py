@@ -23,7 +23,6 @@ from se_shift.utils_swa import bn_update, moving_average
 from se_shift.utils_optim import SGD
 
 from adder.adder import Adder2D
-from visualize import visualizer
 os.environ['CUDA_VISIBLE_DEVICES'] = '0,2,8,9'
 
 # Training settings
@@ -79,15 +78,11 @@ parser.add_argument('--dist', type=str, default='uniform', choices=['kaiming_nor
 parser.add_argument('--add_quant', type=bool, default=False, help='whether to quantize adder layer')
 parser.add_argument('--add_bits', type=int, default=16, help='number of bits to represent the adder filters')
 parser.add_argument('--add_sparsity', type=float, default=0, help='sparsity in adder filters')
-# visualization
-parser.add_argument('--visualize', action="store_true", default=False, help='if use visualization')
 # distributed parallel
 parser.add_argument("--local_rank", type=int, default=0)
 parser.add_argument("--port", type=str, default="10000")
 parser.add_argument('--distributed', action='store_true', help='whether to use distributed training')
-# tropical visualization
-parser.add_argument('--vis_tropical', action='store_true', help='visualize last layer of network')
-parser.add_argument('--visualize_dir', default="", type=str, help='visualize last layer of network')
+# eval only
 parser.add_argument('--eval_only', action='store_true', help='whether only evaluation')
 
 args = parser.parse_args()
@@ -552,10 +547,6 @@ def train(epoch):
     print('one epoch training time: ', time.time()-start_time)
     history_score[epoch][0] = avg_loss / len(train_loader)
     history_score[epoch][1] = np.round(train_acc / len(train_loader), 2)
-    if args.visualize:
-        feat = torch.cat(feat_loader, 0)
-        labels = torch.cat(idx_loader, 0)
-        visualize(feat.data.cpu().numpy(), labels.data.cpu().numpy(), epoch)
 
 def test(model):
     model.eval()
@@ -565,10 +556,7 @@ def test(model):
         if args.cuda:
             data, target = data.cuda(), target.cuda()
         data, target = Variable(data, volatile=True), Variable(target)
-        if args.visualize:
-            _, output = model(data)
-        else:
-            output = model(data)
+        output = model(data)
         test_loss += F.cross_entropy(output, target, size_average=False).item() # sum up batch loss
         prec1, prec5 = accuracy(output.data, target.data, topk=(1, 5))
         test_acc += prec1.item()
@@ -583,7 +571,6 @@ best_prec1 = 0.
 swa_best_prec1 = 0.
 swa_n = 0
 swa_acc1 = 0.
-vis = visualizer(args.epochs, num_classes)
 for epoch in range(args.start_epoch, args.epochs):
 
 
@@ -605,8 +592,6 @@ for epoch in range(args.start_epoch, args.epochs):
     else:
         raise NotImplementedError
     train(epoch)
-    if args.vis_tropical:
-        vis.visualize(list(model.children())[-1].weight.data.cpu(), epoch, dir=args.visualize_dir)
     prec1 = test(model)
     history_score[epoch][2] = prec1
     is_best = prec1 > best_prec1
