@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-success.svg)](https://opensource.org/licenses/MIT)
 
-This is PyTorch implementation of ***ShiftAddNet: A Hardware-Inspired Deep Network*** published on the NeurIPS 2020
+This is a PyTorch implementation of ***ShiftAddNet: A Hardware-Inspired Deep Network*** published on the NeurIPS 2020
 
 
 ---
@@ -62,38 +62,47 @@ We release the pretrained checkpoints in [Google Drive](https://drive.google.com
 * Examples for training of AdderNet
 
 ````
-bash ./scripts/addernet/cifar10/FP32.sh
-bash ./scripts/addernet/cifar10/FIX8.sh
+# CIFAR-10
+    bash ./scripts/addernet/cifar10/FP32.sh
+    bash ./scripts/addernet/cifar10/FIX8.sh
 
-bash ./scripts/addernet/cifar100/FP32.sh
-bash ./scripts/addernet/cifar100/FIX8.sh
+# CIFAR-100
+    bash ./scripts/addernet/cifar100/FP32.sh
+    bash ./scripts/addernet/cifar100/FIX8.sh
 ````
 
 * Examples for training of DeepShift
 
 ````
-bash ./scripts/deepshift/cifar10.sh
-bash ./scripts/deepshift/cifar100.sh
+# CIFAR-10
+    bash ./scripts/deepshift/cifar10.sh
+
+# CIFAR-100
+    bash ./scripts/deepshift/cifar100.sh
 ````
 
 * Examples for training of ShiftAddNet
 
 ````
-bash ./scripts/shiftaddnet/cifar10/FP32.sh
-bash ./scripts/shiftaddnet/cifar10/FIX8.sh
+# CIFAR-10
+    bash ./scripts/shiftaddnet/cifar10/FP32.sh
+    bash ./scripts/shiftaddnet/cifar10/FIX8.sh
 
-bash ./scripts/shiftaddnet/cifar100/FP32.sh
-bash ./scripts/shiftaddnet/cifar100/FIX8.sh
+# CIFAR-100
+    bash ./scripts/shiftaddnet/cifar100/FP32.sh
+    bash ./scripts/shiftaddnet/cifar100/FIX8.sh
 ````
 
 * Examples for training of ShiftAddNet (FIX shift variant)
 
 ````
-bash ./scripts/shiftaddnet_fix/cifar10/FP32.sh
-bash ./scripts/shiftaddnet_fix/cifar10/FIX8.sh
+# CIFAR-10
+    bash ./scripts/shiftaddnet_fix/cifar10/FP32.sh
+    bash ./scripts/shiftaddnet_fix/cifar10/FIX8.sh
 
-bash ./scripts/shiftaddnet_fix/cifar100/FP32.sh
-bash ./scripts/shiftaddnet_fix/cifar100/FIX8.sh
+# CIFAR-100
+    bash ./scripts/shiftaddnet_fix/cifar100/FP32.sh
+    bash ./scripts/shiftaddnet_fix/cifar100/FIX8.sh
 ````
 
 ---
