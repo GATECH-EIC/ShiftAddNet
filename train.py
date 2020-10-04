@@ -60,7 +60,7 @@ parser.add_argument('--add_quant', type=bool, default=False, help='whether to qu
 parser.add_argument('--add_bits', type=int, default=8, help='number of bits to represent the adder filters')
 parser.add_argument('--quantize_v', type=str, default='sbm', help='quantize version')
 # shift hyper-parameters
-parser.add_argument('--shift_quant_bits', type=int, default=0, help='quantization training for shift layer')
+parser.add_argument('--shift_quant_bits', type=int, default=16, help='quantization training for shift layer')
 # visualization
 parser.add_argument('--visualize', action="store_true", default=False, help='if use visualization')
 # distributed parallel
