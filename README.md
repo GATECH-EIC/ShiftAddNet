@@ -7,7 +7,7 @@ This is a PyTorch implementation of ***ShiftAddNet: A Hardware-Inspired Deep Net
 
 ---
 
-### Prerequisite
+## Prerequisite
 
 * GCC >= 5.4.0
 * PyTorch == 1.4
@@ -55,9 +55,9 @@ python check.py
 
 You should be able to successfully compile and see the runtime speed comparisons in the toy cases.
 
----
 
-### Reproduce Resutlts in Paper
+
+## Reproduce Resutlts in Paper
 
 We release the pretrained checkpoints in [Google Drive](https://drive.google.com/drive/folders/1nON7w5-y40PPGT1NCh_n_h3RLFwP8DO6?usp=sharing). To evaluate the inference accuracy of test set, we provide evaluation scripts shown below for your convenience. If you want to train your own model, the only change should be removing `--eval_only` option in the commands.
 
@@ -107,9 +107,12 @@ We release the pretrained checkpoints in [Google Drive](https://drive.google.com
     bash ./scripts/shiftaddnet_fix/cifar100/FIX8.sh
 ````
 
----
+## ShiftAddNet on IoT
 
-### T-SNE Visualization
+Please refer to `./IoT` directory for detailed description.
+
+
+## T-SNE Visualization
 
 Reproduce the T-SNE visualization of the class divergences in AdderNet, and the proposed ShiftAddNet, using ResNet-20 on CIFAR-10 as an example.
 
@@ -132,15 +135,8 @@ The output figure should look like below:
 <br><br>
 ![](./tsne_vis/comp.png)
 
----
 
-### ShiftAddNet on IoT
-
-Please refer to `./IoT` directory for detailed description.
-
----
-
-### Citation
+## Citation
 
 If you find this codebase is useful for your research, please cite:
 
